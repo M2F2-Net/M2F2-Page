@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Multi-modal Interpretable Face Forgery Detection</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static//favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <style>
+    /* 样式部分 */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      max-width: 80%; 
+      max-height: 80vh;
+    }
+
+    .popup video {
+      width: 100%;
+      height: auto;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      color: red;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+    }
+
+    img {
+      cursor: pointer;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .image-grid img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Multi-modal Interpretable Face Forgery Detection</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Submission
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2404.06692.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+             <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Click Image to Watch Video</h2>
+        <img class="triggerImage" data-video="static\videos\1.mp4" src="static\images\0_034_590.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\2.mp4" src="static\images\0_052_108.jpg" alt="Click to watch video 2">
+        <img class="triggerImage" data-video="static\videos\3.mp4" src="static\images\0_059_050.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\4.mp4" src="static\images\0_064_991.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\5.mp4" src="static\images\0_070_057.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\6.mp4" src="static\images\0_077_100.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\7.mp4" src="static\images\0_078_955.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\8.mp4" src="static\images\0_106_198.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\9.mp4" src="static\images\0_109_107.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\10.mp4" src="static\images\0_140_143.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\11.mp4" src="static\images\0_141_161.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\12.mp4" src="static\images\0_150_153.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\13.mp4" src="static\images\0_280_249.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\14.mp4" src="static\images\0_357_432.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\15.mp4" src="static\images\0_442_195.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\16.mp4" src="static\images\0_616_614.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\17.mp4" src="static\images\0_649_816.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\18.mp4" src="static\images\1_271_264.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\19.mp4" src="static\images\1_453_402.jpg" alt="Click to watch video 1">
+        <img class="triggerImage" data-video="static\videos\20.mp4" src="static\images\1_669_682.jpg" alt="Click to watch video 1">
+
+        <!-- Overlay background -->
+        <div id="overlay" class="overlay"></div>
+
+        <!-- Popup window -->
+        <div id="popup" class="popup">
+          <span id="closeBtn" class="close-btn">&times;</span>
+          <video id="popupVideo" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+          <div class="content">
+            <video id="similar_work-video" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/3.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Deepfake detection is a long-established research topic crucial for combating the spread of malicious misinformation. 
+            Unlike previous methods that provide either binary classification results or textual explanations for deepfake detection, we propose a novel method that delivers both simultaneously. 
+            Our method harnesses the multi-modal learning power of the pre-trained CLIP and the unprecedented interpretability of large language models (LLMs) to enhance both the generalization and interpretability of deepfake detection. 
+            Specifically, we introduce a multi-modal face forgery detector (M2F2-Det) that employs specially designed face forgery prompt learning, integrating zero-shot learning capabilities of the pre-trained CLIP to improve generalization to unseen forgeries.
+            Also, M2F2-Det incorporates the LLM to provide detailed explanations for detection decisions, offering strong interpretability by bridging the gap between natural language and the subtle nuances of facial forgery detection. 
+            Empirically, we evaluate M2F2-Det on both detection and sentence generation tasks, on both of which M2F2-Det achieves competitive performance, showing its effectiveness in detecting and explaining diverse and unseen forgeries. 
+            Code and models will be released upon publication.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">  
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content image">
+          <img src="static/figs/thumbnail.png", alt="thumbnail">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Generative Models (GMs) have shown remarkable success in producing highly realistic and visually compelling images. 
+However, despite their advancements, these models have also enabled the creation of AI-generated content (AIGC), such as deepfakes, raising concerns about the spread of deceptive or manipulated facial images. 
+To counter this, significant progress has been made in developing deepfake detection techniques, which aim to identify and mitigate risks posed by these synthetic facial forgeries.<br>
+
+
+However, three aspects are worth noting in prior works.
+First, unlike conventional methods that formulate deepfake detection as a binary classification task, DD-VQA generates human-readable textual explanations, significantly improving deepfake detection interpretability.
+However, since it fine-tunes a sentence-generation model without dedicated mechanisms for deepfake detection, it delivers worse detection accuracy on common deepfake benchmarks than SoTA methods.  
+Second, although some works show that the vision-language model, e.g., CLIP, is effective in image forensics, they lack automated and scalable input text prompts to describe diverse forgeries, hence restricting the adaptation of CLIP's multi-modal learning ability.
+Third, the open-set recognition ability of the CLIP visual encoder enables it to identify a wide range of visual semantics, allowing seamless integration with LLMs for various tasks (e.g., document parsing and medical diagnosis) to elucidate reasoning and decision-making processes. 
+However, this recognition ability receives limited attention in deepfake detection.<br>
+
+Motivated by these three observations, we propose a Multi-Modal Face Forgery Detector (M2F2-Det) that not only provides accurate binary classification results but also generates convincing textual explanations.
+M2F2-Det uses Forgery Prompt Learning, an efficient adaptation strategy that generates text embeddings for universal forged face images, transferring CLIP's effectiveness in the deepfake detection task.
+Also, a bridge adapter is proposed to leverage the frozen CLIP visual encoder, enhancing M2F2-Det's detection performance and its integration with LLM for textual description generation.<br>
+
+There are two essential designs in Forgery Prompt Learning (FPL): universal forgery prompts (UF-prompts) and layer-wise forgery tokens (LF tokens)
+First, UF-prompts have specific general and specific forgery tokens:
+general forgery tokens capture the common patterns and invariants that exist in various forged facial images, and learning such invariants is important to generalizing to unseen forgeries;
+specific forgery tokens learn detailed and fine-grained forged patterns depending on the input image.
+For example, forged patterns can be specific facial patterns or unnatural foreign shadows.
+Secondly, we freeze the CLIP text encoder while introducing trainable layer-wise forgery tokens as inputs to each of its Transformer layers.
+These task-specific tokens significantly enhance CLIP's adaptability to deepfake detection while preserving the effectiveness of CLIP's pre-trained weights. <br>
+
+Also, a bridge adapter (Bri-Ada.) is proposed to leverage the CLIP visual encoder's abilities in forgery detection and open-set recognition abilities.
+The Bri-Ada. reuses intermediate features from the CLIP image encoder, preserving its foundational strengths in representation learning, which proves generalizable enough to identify unseen forgeries. <br>
+
+Bri.-Ada incorporates the deepfake encoder that provides sufficient domain knowledge to help obtain a more robust and effective visual representation in deepfake detection.
+<!-- Specifically, Fig.~\ref{fig_archi}\textcolor{red}{a} shows the detailed architecture of M2F2-Det --- utilizes FPL to obtain the text embedding that helps produce forgery attention maps, and such maps serve as prior knowledge and then are injected into the deepfake encoder connected with Bri-Ada. -->
+Furthermore, to leverage the open-set recognition capability of the CLIP visual encoder, the Bri-Ada's output also connects with LLM, converting visual features into textual descriptions, 
+Specifically, we convert the deepfake encoder's output into a frequency-based token. 
+This frequency-based token is a language space representation and concatenates with tokens from other modalities, instructing the LLM to generate trustworthy explanations of deepfake detection. <br>
+
+In summary, our contributions are: <br>
+
+We propose a multi-modal face forgery detector, M2F2-Det, which innovatively outputs both binary deepfake detection results and textual explanations, achieving remarkable detection accuracy and interpretation. <br>
+
+M2F2-Det introduces a forgery prompt learning mechanism---automated and effective prompt learning tailored for deepfake detection---that transfers CLIP's powerful multi-modal learning ability into deepfake detection. <br>
+
+M2F2-Det employs a bridge adapter that enhances the integration of LLM, facilitating explanations of the rationale behind deepfake detection decisions and serving as a key component of M2F2-Det's interpretability. <br>
+
+M2F2-Det achieves competitive deepfake detection results on 6 datasets, showing the effectiveness of capturing diverse forgeries. <br>
+Also, M2F2-Det generates convincing textual explanations that significantly enhance the interpretability of deepfake detection both quantitatively and qualitatively. <br>
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content image">
+          <img src="static/figs/main_arch_v3.png", alt="main figure">
+        </div>
+        <!-- <div class="content has-text-justified">
+          <p>
+            Deepfake detection is a long-established research topic crucial for combating the spread of malicious misinformation. 
+            Unlike previous methods that provide either binary classification results or textual explanations for deepfake detection, we propose a novel method that delivers both simultaneously. 
+            Our method harnesses the multi-modal learning power of the pre-trained CLIP and the unprecedented interpretability of large language models (LLMs) to enhance both the generalization and interpretability of deepfake detection. 
+            Specifically, we introduce a multi-modal face forgery detector (M2F2-Det) that employs specially designed face forgery prompt learning, integrating zero-shot learning capabilities of the pre-trained CLIP to improve generalization to unseen forgeries.
+            Also, M2F2-Det incorporates the LLM to provide detailed explanations for detection decisions, offering strong interpretability by bridging the gap between natural language and the subtle nuances of facial forgery detection. 
+            Empirically, we evaluate M2F2-Det on both detection and sentence generation tasks, on both of which M2F2-Det achieves competitive performance, showing its effectiveness in detecting and explaining diverse and unseen forgeries. 
+            Code and models will be released upon publication.
+          </p> -->
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<!-- Paper poster -->
+<!-- <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <div class="content">
+          <h2 class="title">Manuscript (Accepeted by CVPR 2024)</h2>
+
+          <iframe  src="./static/pdf/2404.06692.pdf" width="100%" height="550">
+              </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  title     ={Perception-Oriented Video Frame Interpolation via Asymmetric Blending},
+  author    ={Wu, Guangyang and Tao, Xin and Li, Changlin and Wang, Wenyi and Liu, Xiaohong and Zheng, Qingqing},
+  journal   ={arXiv preprint arXiv:2404.06692},
+  year      ={2024},
+}</code></pre>
+  </div>
+</section> -->
+
+<script>
+  // 等待 DOM 完全加载后再运行脚本
+  document.addEventListener('DOMContentLoaded', function () {
+    // 获取元素
+    const triggerImages = document.querySelectorAll(".triggerImage");
+    const popup = document.getElementById("popup");
+    const popupVideo = document.getElementById("popupVideo");
+    const closeBtn = document.getElementById("closeBtn");
+    const overlay = document.getElementById("overlay");
+
+    // 为每张图片添加点击事件
+    triggerImages.forEach(function (img) {
+      img.onclick = function () {
+        const videoSrc = img.getAttribute("data-video");
+        popupVideo.src = videoSrc;
+        popup.style.display = "block";
+        overlay.style.display = "block";
+        popupVideo.playbackRate = 1.5; // Adjust video speed (1.5x speed)
+        popupVideo.style.width = "100%"
+      };
+    });
+
+    // 关闭弹窗
+    closeBtn.onclick = function () {
+      popup.style.display = "none";
+      overlay.style.display = "none";
+      popupVideo.pause(); // 关闭时暂停视频
+    }
+
+    // 点击遮罩层关闭弹窗
+    overlay.onclick = function () {
+      popup.style.display = "none";
+      overlay.style.display = "none";
+      popupVideo.pause(); // 关闭时暂停视频
+    }
+
+  });
+</script>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            We borrow the website <a href="https://github.com/nerfies/nerfies.github.io">template</a> from this,
+            many thanks for their great help!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
