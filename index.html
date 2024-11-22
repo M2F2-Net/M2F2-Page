@@ -17,7 +17,7 @@
 
     gtag('config', 'G-PYVRSFMDRL');
   </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
@@ -543,9 +543,23 @@
 
           <img src="static/figs/teaser_2-1.png", alt="thumbnail">
         </div>
+          <div class="content has-text-justified">
+              <p>
+                (a) Forgery Prompt Learning (FPL) optimizes <i>UF-prompts</i> and <i>layer-wise forgery tokens</i> (LF tokens) for CLIP's adaptation to deepfake detection. 
+                UF-prompts consist of three segments (<i>e.g.</i>, trainable general forgery tokens (<i>i.e.</i>, <b>V<sub>1</sub></b>, <b>V<sub>2</sub></b>, and <b>V<sub>3</sub></b>) and specific forgery tokens (<i>i.e.</i>, <b>V<sub>4</sub></b>, <b>V<sub>5</sub></b>, and <b>V<sub>6</sub></b>), as well as fixed tokens "Forged Face").              </p>
+          </div>
         <div class="content image">
           <img src="static/figs/main_arch_v3.png", alt="main figure">
         </div>
+        <div class="content has-text-justified">
+          <p>
+            (a) The Multi-modal Face Forgery Detector (M2F2-Det) contains
+    pre-trained CLIP image and text encoders (<i>i.e.</i>, \( \mathcal{E}_{I} \) and \( \mathcal{E}_{T} \)), the deepfake encoder, as well as the LLM. 
+    Taking universal forgery prompts (UF-prompts) as inputs, \( \mathcal{E}_{T} \) generates global text embedding, <i>e.g.</i>, <b>g<sup>T</sup></b>, that helps obtain the forged attention mask, <i>e.g.</i>, <b>M<sub>b</sub></b>. 
+    The deepfake encoder utilizes the bridge adapter, <i>i.e.</i>, \( \mathcal{E}_{A} \), for detecting face forgeries, and the LLM generates descriptions based on outputs from \( \mathcal{E}_{I} \) and learned forgery representation (<b>F<sup>0</sup></b>).
+    (b) In the pre-trained CLIP text encoder, we introduce trainable layer-wise forgery tokens as inputs to each Transformer encoder layer.
+         </p>
+      </div>
         <div class="content image">
           <img src="static/figs/bridge_adapter.png", alt="main figure">
         </div>
@@ -580,9 +594,6 @@
         </div> -->
         <div class="content image">
           <img src="static/figs/gen_result-1.png", alt="main figure">
-        </div>
-        <div class="content image">
-          <img src="static/figs/supp_figure_1.png", alt="main figure">
         </div>
         <div class="content image">
           <img src="static/figs/heatmap_v6.png", alt="main figure">
